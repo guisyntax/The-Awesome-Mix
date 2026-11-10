@@ -24,33 +24,30 @@ body {
 
 /*  HEADER  */
 .header {
-    display: flex;
-    justify-content: space-between;
-    padding: 30px;
+    padding: 10px;
     background: var(--black-soft);
     border-bottom: 2px solid var(--magenta);
     box-shadow: 0 4px 20px rgba(224, 36, 94, 0.25);
 }
 
-.logo {
-    width: 320px;
+.container-menu{
+    display: flex;
+    justify-content: center;
 }
 
-.container-menu {
-    display: flex;
-    width: 50%;
-    flex-direction: column;
-    justify-content: center;
+.logo {
+    width: 250px;
 }
 
 .menu {
     display: flex;
-    gap: 40px;
-    justify-content: flex-end;
     padding: 20px;
     font-size: 22px;
     font-weight: 700;
     color: var(--gold);
+    justify-content: space-evenly;
+    align-items: center;
+    width: 75%;
 }
 
 .menu a:hover {
@@ -169,132 +166,6 @@ body {
     gap: 20px;
     align-items: center;
 }
-
-/* LOGIN */
-.section-login{
-    display: flex;
-    justify-content: space-between;
-    /* margin: 30px; */
-    padding: 100px; 
-    background: linear-gradient(rgba(7, 5, 13, 0.35), rgba(7, 5, 13, 0.7)),
-    url(../assets/img/finita-galaxy-5k-lo-1920x1080.jpg) center / cover no-repeat;
-}
-
-.section-chamada{
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    text-align: center;
-    gap: 20px;
-    justify-content: center;
-    font-size: 28px;
-}
-
-.chamada-img{
-    width: 800px;
-}
-
-.section-form-login{
-    display: flex;
-    justify-content: center;
-    width: 50%;
-}
-
-.section-form-login h2{
-    font-size: 48px;
-}
-
-.form-login{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid var(--magenta);
-    box-shadow: 0 4px 20px rgba(224, 36, 94, 0.25);
-    padding: 40px;
-    width: 500px;
-    height: 550px;
-    gap: 40px;
-    border-radius: 10px;
-    background-color: var(--black-soft);
-    font-weight: bold;
-}
-
-.form-login p{
-    font-size: 30px;
-    padding: 10px;
-}
-
-
-
-.btn-login{
-    padding: 18px;
-    background-color: var(--magenta);
-    border-radius: 50px;
-    width: 440px;
-    transition: 0.5s;
-    box-shadow: 0 4px 20px rgba(224, 36, 94, 0.25);
-}
-
-.btn-login:hover{
-    transition: 0.2s;
-    background-color: var(--violet);
-    
-}
-
-.campo{
-    display: flex;
-    flex-direction: column;
-    /* text-align: center; */
-    gap: 5px;
-}
-
-.campo-input{
-    background: none;
-    border: 2px solid rgba(96, 21, 137, 0.832);
-    padding: 27px;
-    border-radius: 10px;
-    width: 440px;
-    height: 50px;
-    outline: none;
-}
-
-.campo-input:focus{
-    transition: 0.7s;
-    border-color: var(--magenta);
-    box-shadow: 0 0 14px rgba(224, 36, 94, 0.5);
-}
-
-.campo span{
-    font-size: 18px;
-}
-
-.campo-cadastro p{
-    font-size: 12px;
-}
-
-.campo-icone {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.campo-icone i {
-    position: absolute;
-    left: 18px;
-    font-size: 18px;
-    color: var(--violet);
-    pointer-events: none;
-    transition: color 0.3s;
-}
-
-.campo-icone .campo-input {
-    padding-left: 52px;
-}
-
-.campo-icone:focus-within i {
-    color: var(--magenta);
-}
-
 
 
 /* Footer */
