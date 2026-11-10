@@ -200,6 +200,10 @@ body {
     width: 50%;
 }
 
+.section-form-login h2{
+    font-size: 48px;
+}
+
 .form-login{
     display: flex;
     flex-direction: column;
@@ -211,6 +215,8 @@ body {
     height: 550px;
     gap: 40px;
     border-radius: 10px;
+    background-color: var(--black-soft);
+    font-weight: bold;
 }
 
 .form-login p{
@@ -221,34 +227,41 @@ body {
 
 
 .btn-login{
-    padding: 10px;
+    padding: 18px;
     background-color: var(--magenta);
-    border-radius: 15px;
-    width: 100px;
-    opacity: 70%;
-    transition: 1s;
+    border-radius: 50px;
+    width: 440px;
+    transition: 0.5s;
     box-shadow: 0 4px 20px rgba(224, 36, 94, 0.25);
 }
 
 .btn-login:hover{
-    opacity: 100%;
     transition: 0.2s;
-    box-shadow: 0 4px 20px rgba(224, 36, 94, 0.25);
+    background-color: var(--violet);
     
 }
 
 .campo{
     display: flex;
     flex-direction: column;
-    text-align: center;
+    /* text-align: center; */
     gap: 5px;
 }
 
 .campo-input{
     background: none;
-    border: 2px solid var(--magenta);
-    padding: 7px;
+    border: 2px solid rgba(96, 21, 137, 0.832);
+    padding: 27px;
     border-radius: 10px;
+    width: 440px;
+    height: 50px;
+    outline: none;
+}
+
+.campo-input:focus{
+    transition: 0.7s;
+    border-color: var(--magenta);
+    box-shadow: 0 0 14px rgba(224, 36, 94, 0.5);
 }
 
 .campo span{
@@ -257,6 +270,29 @@ body {
 
 .campo-cadastro p{
     font-size: 12px;
+}
+
+.campo-icone {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.campo-icone i {
+    position: absolute;
+    left: 18px;
+    font-size: 18px;
+    color: var(--violet);
+    pointer-events: none;
+    transition: color 0.3s;
+}
+
+.campo-icone .campo-input {
+    padding-left: 52px;
+}
+
+.campo-icone:focus-within i {
+    color: var(--magenta);
 }
 
 
