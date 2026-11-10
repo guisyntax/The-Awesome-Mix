@@ -73,7 +73,7 @@ body {
     gap: 2rem;
     min-height: 70vh;
     text-align: center;
-    background-image: url(/src/img/guardians-of-the-galaxy-fan-made-of-1920x1080.jpg);
+    background-image: url(../assets/img/guardians-of-the-galaxy-fan-made-of-1920x1080.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -160,6 +160,40 @@ body {
     margin-bottom: 50px;
 }
 
+/* CURIOSIDADES */
+.container-curiosidades-titulo{
+    margin-top: 50px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+/* LOGIN */
+.form-login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid var(--magenta);
+    box-shadow: 0 4px 20px rgba(224, 36, 94, 0.25);
+    padding: 40px;
+    width: 500px;
+    height: 500px;
+    gap: 50px;
+}
+
+.form-login p{
+    font-size: 30px;
+    padding: 10px;
+}
+
+.section-login{
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+}
+
 /* Footer */
 .footer{
     border-top: 2px solid var(--magenta);
@@ -188,15 +222,7 @@ body {
     margin-bottom: 20px;
 }
 
-/* CURIOSIDADES */
-.container-curiosidades-titulo{
-    margin-top: 50px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-}
+
 
 
 @media (max-width: 800px) {
