@@ -180,7 +180,8 @@ body {
     padding: 40px;
     width: 500px;
     height: 500px;
-    gap: 50px;
+    gap: 40px;
+    border-radius: 10px;
 }
 
 .form-login p{
@@ -193,6 +194,23 @@ body {
     justify-content: center;
     margin: 30px;
 }
+
+.btn-login{
+    padding: 10px;
+    background-color: var(--magenta);
+    border-radius: 15px;
+    width: 100px;
+    opacity: 70%;
+    transition: 1s;
+    box-shadow: 0 4px 20px rgba(224, 36, 94, 0.25);
+}
+
+.btn-login:hover{
+    opacity: 100%;
+    transition: 0.2s;
+    box-shadow: 0 4px 20px rgba(224, 36, 94, 0.25);
+}
+
 
 /* Footer */
 .footer{
