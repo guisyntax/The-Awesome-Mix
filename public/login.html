@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>The Awesome Mix</title>
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/login.css">
@@ -28,7 +28,7 @@
                         <img src="./assets/img/titulo-the-awesome-mix.png" alt="Titulo AWESOME MIX" class="logo">
                     </picture>
                 </li>
-                
+
                 <li><a href="./login.html">Login</a></li>
                 <li><a href="./cadastro.html">Cadastro</a></li>
             </ul>
@@ -69,8 +69,11 @@
                 <button class="btn-login" onclick="entrar()">Entrar</button>
 
                 <div class="campo">
-                    <span>Não tem uma conta ? <span style="color: deeppink;" class="span-clique-aqui"><a
-                                href="./cadastro.html"> Clique aqui</a></span></span>
+                    <span>Não tem uma conta ? <span style="color: deeppink;" class="span-clique-aqui"><a href="./cadastro.html"> Clique aqui</a></span></span>
+                </div>
+
+                <div id="div_mensagemErro">
+                    
                 </div>
             </div>
             </div>
@@ -108,3 +111,62 @@
 </body>
 
 </html>
+<script>
+    function entrar() {
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            div_mensagemErro.innerHTML = `<span style="color: red;">Preencha os campos !</span>`
+        }else{ 
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+
+                    setTimeout(function () {
+                        window.location = "./home.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    }
+
+
+</script>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>The Awesome Mix</title>
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/cadastro.css">
@@ -58,7 +58,7 @@
                     <span class="campo-info">Nome:</span>
                     <div class="campo-icone">
                         <i class="fa-solid fa-user"></i>
-                        <input id="email_input" type="email" placeholder="Como deseja ser chamado" class="campo-input">
+                        <input id="nome_input" type="text" placeholder="Como deseja ser chamado" class="campo-input">
                     </div>
                 </div> 
                 
@@ -90,6 +90,10 @@
 
                     <div class="campo">
                         <span>Já tem conta ? <span style="color: deeppink;" class="span-clique-aqui"><a href="./login.html"> Entrar</a></span></span>
+                    </div>
+
+                    <div id="div_mensagemErro">
+
                     </div>
                 </div>
             </div>
@@ -127,3 +131,60 @@
 </body>
 
 </html>
+<script>
+    
+  function cadastrar() {
+    var nomeVar = nome_input.value;
+    var emailVar = email_input.value;
+    var senhaVar = senha_input.value;
+    var confirmacaoSenhaVar = confirmacao_senha_input.value;
+
+    if(nomeVar == '' || nomeVar.length < 4){
+      div_mensagemErro.innerHTML = `<span style="color: red;">O nome de úsuario deve conter 4 caracteres!</span>`
+    }else if(!(emailVar.includes('@')) || !(emailVar.includes('.com'))){
+      div_mensagemErro.innerHTML = `<span style="color: red;">Insira um E-mail válido!</span>`
+    }else if(senhaVar.length < 8){
+      div_mensagemErro.innerHTML = `<span style="color: red;">A senha deve possuir pelo menos 8 caracteres</span>`
+    }else if(confirmacaoSenhaVar != senhaVar){
+      div_mensagemErro.innerHTML = `<span style="color: red;">As senhas não coincidem!</span>`
+    }else{
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
+  }
+
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+  }
+    }
+
+    
+</script>
