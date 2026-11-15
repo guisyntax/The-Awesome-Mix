@@ -10,14 +10,14 @@ use mixtape;
 create table usuario(
 	idUsuario int primary key auto_increment,
     nome varchar(45),
-    email varchar(45),
+    email varchar(45) unique,
     senha varchar(45),
     dataCadastro datetime default current_timestamp
 );
 
-create table album(
-	idAlbum int auto_increment primary key,
-    nome varchar(45) not null,
+create table album (
+    idAlbum int auto_increment primary key,
+    nome varchar(50) not null,
     capa varchar(255) not null
 );
 
