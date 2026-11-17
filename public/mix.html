@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/mix.css">
+    <link rel="stylesheet" href="./css/mix-faixas.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,8 +39,8 @@
     </div>
 
     <div class="container-btn-faixas-album">
-        <button class="aba ativo btn-faixas" id="aba_faixas" onclick="mudarAba('faixas')">Faixas</button>
-        <button class="aba btn-albuns" id="aba_albuns" onclick="mudarAba('albuns')">Álbuns</button>
+        <a class="aba ativo btn-faixas" href="./mix.html">Faixas</a>
+        <a class="aba btn-albuns" href="./mix-albuns.html">Álbuns</a>
     </div>
 
     <div class="container-mix-select">
@@ -52,7 +53,7 @@
 
     <section class="section-faixas">
         <div class="faixas-titulo">
-            <h4 id="faixas_subtitulo">FAIXAS NO SEU MIX</h4>
+            <h4>FAIXAS NO SEU MIX</h4>
             <h2 id="faixas_total">0 REPRODUÇÕES</h2>
         </div>
 
@@ -63,11 +64,6 @@
                 <div class="kpi">
                     <h3>Música mais ouvida</h3>
                     <div class="destaque" id="kpi_faixa"></div>
-                </div>
-
-                <div class="kpi">
-                    <h3>Álbum mais ouvido</h3>
-                    <div class="destaque" id="kpi_album"></div>
                 </div>
 
                 <div class="kpi">
@@ -127,307 +123,7 @@
         <audio id="player" ontimeupdate="atualizarPlayer()" onended="terminou()"></audio>
     </div>
 
-    <script>
-        let idUsuario = sessionStorage.ID_USUARIO;
-
-        if (idUsuario == undefined) {
-            window.location = "./login.html";
-        }
-
-        let faixas = [];
-        let albuns = [];
-        let dias = [];
-        let abaAtual = "faixas";
-        let filtroAtual = "todos";
-        let idTocando = 0;
-        let jaRegistrou = false;
-
-        mix_titulo.innerHTML = `Olá, ${sessionStorage.NOME_USUARIO}`;
-
-        function carregarDados() {
-            fetch(`/mix/faixas/${idUsuario}`).then(function (resposta) {
-                resposta.json().then(function (json) {
-                    faixas = json;
-                    desenhar();
-                });
-            }).catch(function (erro) {
-                console.log(erro);
-            });
-
-            fetch(`/mix/albuns/${idUsuario}`).then(function (resposta) {
-                resposta.json().then(function (json) {
-                    albuns = json;
-                    desenhar();
-                });
-            }).catch(function (erro) {
-                console.log(erro);
-            });
-
-            fetch(`/mix/dias/${idUsuario}`).then(function (resposta) {
-                resposta.json().then(function (json) {
-                    dias = json;
-                    desenhar();
-                });
-            }).catch(function (erro) {
-                console.log(erro);
-            });
-        }
-
-        function desenhar() {
-            desenharLista();
-            desenharKpis();
-        }
-
-        function desenharLista() {
-            let lista = faixas;
-            let posicao = 0;
-            let maior = 0;
-            let soma = 0;
-            let html = "";
-
-            if (abaAtual == "albuns") {
-                lista = albuns;
-                faixas_subtitulo.innerHTML = "ÁLBUNS NO SEU MIX";
-            } else {
-                faixas_subtitulo.innerHTML = "FAIXAS NO SEU MIX";
-            }
-
-            for (let i = 0; i < lista.length; i++) {
-                let item = lista[i];
-
-                if (filtroAtual == "todos" || item.origem == filtroAtual) {
-                    posicao++;
-                    soma += item.total;
-
-                    if (posicao == 1) {
-                        maior = item.total;
-                    }
-
-                    let porcentagem = 0;
-
-                    if (maior > 0) {
-                        porcentagem = item.total / maior * 100;
-                    }
-
-                    let classe = "linha " + item.origem;
-                    let botao = "<span></span>";
-                    let titulo = item.album;
-                    let subtitulo = `${item.qtd} faixas`;
-
-                    if (abaAtual == "faixas") {
-                        botao = `<button class="play" onclick="tocar(${item.idMusica})">▶</button>`;
-                        titulo = item.titulo;
-                        subtitulo = `${item.artista} · ${item.album}`;
-
-                        if (item.idMusica == idTocando) {
-                            classe += " tocando";
-                        }
-                    }
-
-                    html += `
-                        <div class="${classe}">
-                            <span class="pos">${posicao}</span>
-                            ${botao}
-                            <img class="capa" src="${item.capa}" alt="Capa de ${item.album}">
-                            <div class="info">
-                                <b>${titulo}</b>
-                                <span>${subtitulo}</span>
-                            </div>
-                            <div class="barra">
-                                <div style="width: ${porcentagem}%">${item.total} reproduções</div>
-                            </div>
-                        </div>
-                    `;
-                }
-            }
-
-            if (posicao == 0) {
-                html = `<p class="vazio">Nenhuma música encontrada.</p>`;
-            }
-
-            faixas_total.innerHTML = `${soma} REPRODUÇÕES`;
-            container_faixas.innerHTML = html;
-        }
-
-        function desenharKpis() {
-            if (faixas.length > 0 && faixas[0].total > 0) {
-                kpi_faixa.innerHTML = `
-                    <img class="capa-kpi" src="${faixas[0].capa}" alt="Capa de ${faixas[0].album}">
-                    <div>
-                        <b>${faixas[0].titulo}</b>
-                        <span>${faixas[0].artista} · ${faixas[0].total} reproduções</span>
-                    </div>
-                `;
-            } else {
-                kpi_faixa.innerHTML = `<span class="vazio">Toque uma música para começar</span>`;
-            }
-
-            if (albuns.length > 0 && albuns[0].total > 0) {
-                kpi_album.innerHTML = `
-                    <img class="capa-kpi" src="${albuns[0].capa}" alt="Capa de ${albuns[0].album}">
-                    <div>
-                        <b>${albuns[0].album}</b>
-                        <span>${albuns[0].total} reproduções</span>
-                    </div>
-                `;
-            } else {
-                kpi_album.innerHTML = `<span class="vazio">Ainda sem reproduções</span>`;
-            }
-
-            let totalPeter = 0;
-            let totalMinhas = 0;
-
-            for (let i = 0; i < faixas.length; i++) {
-                if (faixas[i].origem == "Peter") {
-                    totalPeter += faixas[i].total;
-                } else {
-                    totalMinhas += faixas[i].total;
-                }
-            }
-
-            let fundo = "rgba(239, 233, 247, 0.15)";
-
-            if (totalPeter + totalMinhas > 0) {
-                let graus = totalPeter / (totalPeter + totalMinhas) * 360;
-                fundo = `conic-gradient(var(--magenta) 0deg ${graus}deg, var(--violet) ${graus}deg 360deg)`;
-            }
-
-            kpi_rosca.innerHTML = `<div class="rosca-disco" style="background: ${fundo}"></div>`;
-
-            kpi_legenda.innerHTML = `
-                <div><i style="background: var(--magenta)"></i>Peter: ${totalPeter}</div>
-                <div><i style="background: var(--violet)"></i>Minhas: ${totalMinhas}</div>
-            `;
-
-            let maiorDia = 1;
-
-            for (let j = 0; j < dias.length; j++) {
-                if (dias[j].total > maiorDia) {
-                    maiorDia = dias[j].total;
-                }
-            }
-
-            let htmlDias = "";
-
-            for (let k = 0; k < dias.length; k++) {
-                let altura = dias[k].total / maiorDia * 80;
-
-                htmlDias += `
-                    <div class="dia">
-                        <span>${dias[k].total}</span>
-                        <div style="height: ${altura}px"></div>
-                        ${dias[k].dia}
-                    </div>
-                `;
-            }
-
-            if (dias.length == 0) {
-                htmlDias = `<span class="vazio">Sem reproduções nos últimos 7 dias</span>`;
-            }
-
-            kpi_dias.innerHTML = htmlDias;
-        }
-
-        function mudarAba(aba) {
-            abaAtual = aba;
-
-            aba_faixas.className = "aba";
-            aba_albuns.className = "aba";
-            document.getElementById("aba_" + aba).className = "aba ativo";
-
-            desenharLista();
-        }
-
-        function filtrar(filtro) {
-            filtroAtual = filtro;
-
-            chip_todos.className = "chip";
-            chip_Peter.className = "chip";
-            chip_Guilherme.className = "chip";
-            document.getElementById("chip_" + filtro).className = "chip ativo";
-
-            desenharLista();
-        }
-
-        function tocar(idMusica) {
-            for (let i = 0; i < faixas.length; i++) {
-                if (faixas[i].idMusica == idMusica) {
-                    idTocando = idMusica;
-                    jaRegistrou = false;
-
-                    player.src = faixas[i].arquivo;
-                    player.play();
-
-                    p_titulo.innerHTML = faixas[i].titulo;
-                    p_artista.innerHTML = faixas[i].artista;
-                    p_capa.innerHTML = `<img class="capa" src="${faixas[i].capa}" alt="Capa de ${faixas[i].album}">`;
-                    p_btn.innerHTML = "❚❚";
-                }
-            }
-
-            desenharLista();
-        }
-
-        function pausarOuTocar() {
-            if (idTocando == 0) {
-                return false;
-            }
-
-            if (player.paused) {
-                player.play();
-                p_btn.innerHTML = "❚❚";
-            } else {
-                player.pause();
-                p_btn.innerHTML = "▶";
-            }
-        }
-
-        function atualizarPlayer() {
-            if (player.duration > 0) {
-                let porcentagem = player.currentTime / player.duration * 100;
-
-                p_barra.innerHTML = `<div style="width: ${porcentagem}%"></div>`;
-                p_tempo.innerHTML = `${Math.floor(player.currentTime)}s / ${Math.floor(player.duration)}s`;
-
-                if (player.currentTime >= 5) {
-                    registrar();
-                }
-            }
-        }
-
-        function terminou() {
-            registrar();
-            p_btn.innerHTML = "▶";
-        }
-
-        function registrar() {
-            if (jaRegistrou == true || idTocando == 0) {
-                return false;
-            }
-
-            jaRegistrou = true;
-
-            fetch("/mix/reproducoes", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    idUsuarioServer: idUsuario,
-                    idMusicaServer: idTocando
-                })
-            }).then(function (resposta) {
-                if (resposta.ok) {
-                    carregarDados();
-                } else {
-                    console.log("Houve um erro ao registrar a reprodução!");
-                }
-            }).catch(function (erro) {
-                console.log(erro);
-            });
-        }
-
-        carregarDados();
-    </script>
+    <script src="./js/mix-comum.js"></script>
+    <script src="./js/mix-faixas.js"></script>
 </body>
 </html>

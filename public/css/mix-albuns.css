@@ -1,0 +1,13 @@
+.linha {
+    grid-template-columns: 28px 48px minmax(0, 1fr) minmax(120px, 42%);
+}
+
+@media (max-width: 860px) {
+    .linha {
+        grid-template-columns: 22px 42px minmax(0, 1fr);
+    }
+
+    .linha .barra {
+        grid-column: 3;
+    }
+}

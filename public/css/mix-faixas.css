@@ -1,0 +1,115 @@
+body {
+    padding-bottom: 110px;
+}
+
+.play {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 2px solid rgba(239, 233, 247, 0.25);
+    border-radius: 50%;
+    font-size: 0.8rem;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.play:hover {
+    border-color: var(--magenta);
+    background: rgba(224, 36, 94, 0.2);
+}
+
+.linha.tocando .play {
+    background: var(--magenta);
+    border-color: var(--magenta);
+}
+
+.player {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 14px 24px;
+    background: var(--black-soft);
+    border-top: 2px solid var(--magenta);
+    box-shadow: 0 -4px 24px rgba(224, 36, 94, 0.3);
+}
+
+.player-capa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 52px;
+    height: 52px;
+    overflow: hidden;
+    border-radius: 6px;
+    background: linear-gradient(135deg, var(--magenta), var(--black-soft));
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.player-capa .capa {
+    width: 100%;
+    height: 100%;
+}
+
+.player .info {
+    flex: none;
+    width: 240px;
+}
+
+.pbtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--magenta);
+    box-shadow: 0 0 16px rgba(224, 36, 94, 0.6);
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.pbtn:hover {
+    background: var(--violet);
+}
+
+.prog {
+    flex: 1;
+    height: 6px;
+    overflow: hidden;
+    border-radius: 3px;
+    background: rgba(239, 233, 247, 0.15);
+}
+
+.prog div {
+    width: 0;
+    height: 100%;
+    border-radius: 3px;
+    background: var(--neon);
+}
+
+.tempo {
+    flex: none;
+    font-size: 1rem;
+    color: rgba(239, 233, 247, 0.7);
+}
+
+@media (max-width: 860px) {
+    .player .info {
+        flex: 1;
+        width: auto;
+    }
+
+    .prog,
+    .tempo {
+        display: none;
+    }
+}
