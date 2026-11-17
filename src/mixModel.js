@@ -15,21 +15,6 @@ function listarFaixas(idUsuario) {
     return database.executar(instrucaoSql);
 }
 
-function listarAlbuns(idUsuario) {
-    var instrucaoSql = `
-        select a.idAlbum, a.nome as album, a.capa,
-               min(m.origem) as origem,
-               count(distinct m.idMusica) as qtd,
-               count(r.idReproducao) as total
-        from album a
-        join musica m on m.fkAlbum = a.idAlbum
-        left join reproducao r on r.fkMusica = m.idMusica and r.fkUsuario = ${idUsuario}
-        group by a.idAlbum
-        order by total desc, a.nome;
-    `;
-
-    return database.executar(instrucaoSql);
-}
 
 function listarDias(idUsuario) {
     var instrucaoSql = `
@@ -54,7 +39,6 @@ function registrar(idUsuario, idMusica) {
 
 module.exports = {
     listarFaixas,
-    listarAlbuns,
     listarDias,
     registrar
 };

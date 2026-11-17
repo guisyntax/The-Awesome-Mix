@@ -17,22 +17,6 @@ function listarFaixas(req, res) {
         });
 }
 
-function listarAlbuns(req, res) {
-    var idUsuario = Number(req.params.idUsuario);
-
-    if (isNaN(idUsuario)) {
-        return res.status(400).send("O id do usuário é inválido!");
-    }
-
-    mixModel.listarAlbuns(idUsuario)
-        .then(function (resultado) {
-            res.json(resultado);
-        })
-        .catch(function (erro) {
-            console.log("Erro ao listar os álbuns:", erro.sqlMessage || erro);
-            res.status(500).json(erro.sqlMessage);
-        });
-}
 
 function listarDias(req, res) {
     var idUsuario = Number(req.params.idUsuario);
@@ -71,7 +55,6 @@ function registrar(req, res) {
 
 module.exports = {
     listarFaixas,
-    listarAlbuns,
     listarDias,
     registrar
 };

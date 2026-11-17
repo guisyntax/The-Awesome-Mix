@@ -7,9 +7,6 @@ router.get("/faixas/:idUsuario", function (req, res) {
     mixController.listarFaixas(req, res);
 });
 
-router.get("/albuns/:idUsuario", function (req, res) {
-    mixController.listarAlbuns(req, res);
-});
 
 router.get("/dias/:idUsuario", function (req, res) {
     mixController.listarDias(req, res);
