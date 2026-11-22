@@ -1,6 +1,6 @@
-CREATE USER 'mix'@'localhost' IDENTIFIED BY '45112784ggAA!';
+CREATE USER 'mix'@'%' IDENTIFIED BY '45112784ggAA!';
 
-GRANT SELECT, INSERT, UPDATE ON mixtape.* TO 'mix'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON mixtape.* TO 'mix'@'%';
 
 FLUSH PRIVILEGES;
 
