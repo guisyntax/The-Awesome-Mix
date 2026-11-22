@@ -382,8 +382,8 @@ Entre-estrelas-e-lacos/
 **1. Clone o repositório e instale as dependências**
 
 ```bash
-git clone https://github.com/guisyntax/Entre-estrelas-e-lacos.git
-cd Entre-estrelas-e-lacos
+git clone https://github.com/guisyntax/The-Awesome-Mix.git
+cd The-Awesome-Mix
 npm install
 ```
 
