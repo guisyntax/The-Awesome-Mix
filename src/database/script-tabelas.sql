@@ -1,4 +1,4 @@
-CREATE USER 'mix'@'localhost' IDENTIFIED BY '45112784';
+CREATE USER 'mix'@'localhost' IDENTIFIED BY '45112784ggAA!';
 
 GRANT SELECT, INSERT, UPDATE ON mixtape.* TO 'mix'@'localhost';
 
