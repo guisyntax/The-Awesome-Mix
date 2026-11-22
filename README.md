@@ -265,20 +265,6 @@ flowchart LR
 
 O back-end segue o padrão **rota → controller → model → banco**: a rota recebe o pedido, o controller valida os dados, e o model monta e executa o SQL.
 
-### Capturas de tela
-
-| Início | Curiosidades |
-|:------:|:------------:|
-| ![Início](docs/img/home.png) | ![Curiosidades](docs/img/curiosidades.png) |
-
-| Login | Cadastro |
-|:-----:|:--------:|
-| ![Login](docs/img/login.png) | ![Cadastro](docs/img/cadastro.png) |
-
-| Mix · Faixas | Mix · Álbuns |
-|:------------:|:------------:|
-| ![Faixas](docs/img/mix-faixas.png) | ![Álbuns](docs/img/mix-albuns.png) |
-
 ---
 
 ## 4. Indicadores
