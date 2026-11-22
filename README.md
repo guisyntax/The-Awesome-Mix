@@ -268,15 +268,15 @@ O back-end segue o padrão **rota → controller → model → banco**: a rota r
 
 | Início | Curiosidades |
 |:------:|:------------:|
-| ![Início](docs/img/home.png) | ![Curiosidades](docs/img/curiosidades.png) |
+| ![Início](public/assets/img/home.png) | ![Curiosidades](public/assets/img/curiosidades.png) |
 
 | Login | Cadastro |
 |:-----:|:--------:|
-| ![Login](docs/img/login.png) | ![Cadastro](docs/img/cadastro.png) |
+| ![Login](public/assets/img/login.png) | ![Cadastro](public/assets/img/cadastro.png) |
 
-| Mix · Faixas | Mix · Álbuns |
-|:------------:|:------------:|
-| ![Faixas](docs/img/mix-faixas.png) | ![Álbuns](docs/img/mix-albuns.png) |
+| Mix · Faixas |
+|:------------:|
+| ![Faixas](public/assets/img/mix-faixas.png)
 
 ---
 
@@ -422,19 +422,6 @@ npm start
 ```
 
 Acesse **http://localhost:3333**.
-
----
-
-## Próximos passos
-
-- [ ] Criptografar as senhas com `bcrypt`
-- [ ] Trocar a montagem de SQL por consultas parametrizadas
-- [ ] Identificar o usuário por sessão ou token, em vez do id enviado pelo navegador
-- [ ] Gráfico dos últimos 7 dias com os dias sem reprodução também aparecendo
-- [ ] Aba de Artistas no dashboard
-- [ ] Marcar músicas como favoritas
-
----
 
 ## Autor
 
