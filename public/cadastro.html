@@ -148,6 +148,7 @@
     }else if(confirmacaoSenhaVar != senhaVar){
       div_mensagemErro.innerHTML = `<span style="color: red;">As senhas não coincidem!</span>`
     }else{
+    div_mensagemErro.innerHTML = `<span style="color: green;">Cadastro realizado com sucesso</span>`;
     fetch("/usuarios/cadastrar", {
       method: "POST",
       headers: {

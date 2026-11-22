@@ -119,9 +119,9 @@
         if (emailVar == "" || senhaVar == "") {
             div_mensagemErro.innerHTML = `<span style="color: red;">Preencha os campos !</span>`
         }else{ 
-
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
+        div_mensagemErro.innerHTML = `<span style="color: green;">Seja bem-vindo!</span>`
 
         fetch("/usuarios/autenticar", {
             method: "POST",
@@ -152,7 +152,7 @@
                 });
 
             } else {
-
+                div_mensagemErro.innerHTML = `<span style="color: red;">Essa conta não existe!</span>`
                 console.log("Houve um erro ao tentar realizar o login!");
 
                 resposta.text().then(texto => {
