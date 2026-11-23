@@ -167,7 +167,7 @@ function atualizarPlayer() {
         p_barra.innerHTML = `<div style="width: ${porcentagem}%"></div>`;
         p_tempo.innerHTML = `${Math.floor(player.currentTime)}s / ${Math.floor(player.duration)}s`;
 
-        if (player.currentTime >= 5) {
+        if (player.currentTime >= 2) {
             registrar();
         }
     }
