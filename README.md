@@ -412,17 +412,6 @@ Acesse **http://localhost:3333**.
 
 ---
 
-## Próximos passos
-
-- [ ] Criptografar as senhas com `bcrypt`
-- [ ] Trocar a montagem de SQL por consultas parametrizadas
-- [ ] Identificar o usuário por sessão ou token, em vez do id enviado pelo navegador
-- [ ] Gráfico dos últimos 7 dias com os dias sem reprodução também aparecendo
-- [ ] Aba de Artistas no dashboard
-- [ ] Marcar músicas como favoritas
-
----
-
 ## Autor
 
 **Guilherme Sousa Pinheiro**
