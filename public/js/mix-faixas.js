@@ -3,24 +3,24 @@ let dias = [];
 let idTocando = 0;
 let jaRegistrou = false;
 
-function carregarDados() {
-    fetch(`/mix/faixas/${idUsuario}`).then(function (resposta) {
-        resposta.json().then(function (json) {
+function carregarDados(){
+    fetch(`/mix/faixas/${idUsuario}`).then(function (resposta){
+        resposta.json().then(function (json){
             faixas = json;
-            desenhar();
-        });
-    }).catch(function (erro) {
-        console.log(erro);
-    });
+            desenhar()
+        })
+    }).catch(function (erro){
+        console.log(erro)
+    }),
 
-    fetch(`/mix/dias/${idUsuario}`).then(function (resposta) {
-        resposta.json().then(function (json) {
+    fetch(`/mix/dias/${idUsuario}`).then(function (resposta){
+        resposta.json().then(function (json){
             dias = json;
-            desenhar();
-        });
-    }).catch(function (erro) {
-        console.log(erro);
-    });
+            desenhar()
+        })
+    }).catch(function (erro){
+        console.log(erro)
+    })
 }
 
 function desenhar() {
